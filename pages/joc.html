@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Joc encertar paraula</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;700;800&display=swap">
+  <link rel="stylesheet" href="../css/estils.css">
+  <script src="../js/joc.js" defer></script>
+</head>
+<body class="pagina-joc">
+
+  <header class="capcalera">
+    <button type="button" id="boto-tornar" class="boto">&laquo; Tornar</button>
+    <button type="button" id="boto-instruccions" class="boto">Instruccions</button>
+    <p class="idioma">Idioma (<span id="idioma-navegador">ca</span>)</p>
+
+    <form id="formulari-paraula" class="formulari-paraula" novalidate>
+      <label for="paraula-input" class="sr-nomes">Paraula secreta</label>
+      <input type="password" id="paraula-input" placeholder="Introdueix una paraula" autocomplete="off">
+      <button type="button" id="boto-ull" class="boto-ull" aria-label="Mostrar la paraula" aria-pressed="false">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/>
+          <circle cx="12" cy="12" r="3"/>
+          <line class="ull-ratllat" x1="3" y1="21" x2="21" y2="3"/>
+        </svg>
+      </button>
+      <button type="submit" id="boto-comencar-partida" class="boto">Començar partida</button>
+    </form>
+  </header>
+
+  <main class="joc">
+    <section id="paraula-secreta" class="paraula" aria-live="polite">Començar partida</section>
+
+    <section class="tauler">
+      <aside id="targeta-jugador1" class="targeta-jugador">
+        <h2 id="nom-jugador-1">Jugador 1</h2>
+        <dl>
+          <div><dt>Punts partides actuals</dt><dd id="punts-actuals-1">0</dd></div>
+          <div><dt>Total partides</dt><dd id="total-partides-1">0</dd></div>
+          <div><dt>Partides guanyades</dt><dd id="partides-guanyades-1">0</dd></div>
+          <div><dt>Partida amb més punts</dt><dd id="partida-maxima-1">Sense punts</dd></div>
+        </dl>
+      </aside>
+
+      <figure class="globus">
+        <img id="imatge-globus" src="../img/globus-0.png" alt="Globus de la partida">
+      </figure>
+
+      <!-- Només es mostra a la branca multijugador -->
+      <aside id="targeta-jugador2" class="targeta-jugador" hidden>
+        <h2 id="nom-jugador-2">Jugador 2</h2>
+        <dl>
+          <div><dt>Punts partides actuals</dt><dd id="punts-actuals-2">0</dd></div>
+          <div><dt>Total partides</dt><dd id="total-partides-2">0</dd></div>
+          <div><dt>Partides guanyades</dt><dd id="partides-guanyades-2">0</dd></div>
+          <div><dt>Partida amb més punts</dt><dd id="partida-maxima-2">Sense punts</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <!-- Els botons de les lletres es creen amb createElement -->
+    <section id="botons-lletres" class="lletres" aria-label="Lletres"></section>
+  </main>
+
+  <dialog id="dialeg-error" class="dialeg">
+    <p id="missatge-error"></p>
+    <button type="button" id="tancar-dialeg" class="boto">Tancar</button>
+  </dialog>
+
+</body>
+</html>

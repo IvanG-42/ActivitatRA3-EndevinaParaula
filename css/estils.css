@@ -1,0 +1,331 @@
+/* ===== Variables i base compartida ===== */
+:root {
+  --fons: #d6ebf8;            /* el JS el canvia segons el navegador */
+  --tinta: #16213e;
+  --globus: #e63950;
+  --llima: #c7f464;
+  --verd: #1a7f4f;
+  --verd-clar: #b9ee9b;
+  --vermell: #c1121f;
+  --vermell-clar: #fde8ea;
+  --targeta: #b4415f;
+  --paper: #ffffff;
+  --paraula: #c9d1fb;
+  --linia: #9fb0c7;
+  --font-titol: "Fredoka", "Trebuchet MS", system-ui, sans-serif;
+  --font-text: "Nunito", "Segoe UI", system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-text);
+  line-height: 1.5;
+  color: var(--tinta);
+  background-color: var(--fons);
+  background-image: radial-gradient(rgba(255, 255, 255, .5) 2px, transparent 2px);
+  background-size: 28px 28px;
+}
+
+h1, h2 { margin: 0; font-family: var(--font-titol); font-weight: 600; line-height: 1.15; }
+
+.sr-nomes {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+:focus-visible { outline: 3px solid var(--globus); outline-offset: 3px; }
+
+/* ===== Botons ===== */
+.boto {
+  font: 700 .95rem var(--font-text);
+  color: var(--tinta);
+  background: var(--llima);
+  border: 2px solid var(--tinta);
+  border-radius: 999px;
+  padding: .55rem 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 3px 0 var(--tinta);
+  transition: transform .08s, box-shadow .08s;
+}
+.boto:hover { transform: translateY(-1px); box-shadow: 0 4px 0 var(--tinta); }
+.boto:active { transform: translateY(3px); box-shadow: 0 0 0 var(--tinta); }
+.boto:disabled { opacity: .45; cursor: not-allowed; transform: none; box-shadow: none; }
+.boto--suau { background: var(--paper); }
+
+/* ===== Camps de formulari i validació ===== */
+input[type="text"], input[type="password"] {
+  width: 100%;
+  font: inherit;
+  color: var(--tinta);
+  background: var(--paper);
+  padding: .6rem .8rem;
+  border: 2px solid var(--linia);
+  border-radius: 10px;
+}
+input.correcte { border-color: var(--verd); }
+input.incorrecte { border-color: var(--vermell); }
+
+.missatge { margin: .3rem 0 0; min-height: 1.3em; font-size: .88rem; font-weight: 700; }
+.missatge.error { color: var(--vermell); }
+.missatge.ok { color: var(--verd); }
+.missatge.ok::before { content: "\2713\00a0"; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+
+/* ===== Pàgina inicial ===== */
+.pagina-inici {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 7rem 1rem 3rem;
+}
+
+.targeta-inici {
+  position: relative;
+  width: min(100%, 580px);
+  padding: 0 2rem 2rem;
+  background: var(--paper);
+  border: 3px solid var(--tinta);
+  border-radius: 28px;
+  box-shadow: 8px 8px 0 var(--tinta);
+}
+
+/* Globus decoratiu només amb CSS: l'element memorable de la pàgina */
+.globus-deco {
+  position: relative;
+  width: 76px;
+  height: 94px;
+  margin: -78px auto 46px;
+  background: radial-gradient(circle at 32% 28%, #ff9aa8 0 7%, var(--globus) 40%, #b81e36 100%);
+  border-radius: 50% 50% 48% 48% / 58% 58% 42% 42%;
+  animation: flotar 4s ease-in-out infinite;
+}
+.globus-deco::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -9px;
+  transform: translateX(-50%);
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 10px solid #b81e36;
+}
+.globus-deco::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 2px;
+  height: 36px;
+  margin-top: 1px;
+  background: var(--tinta);
+}
+@keyframes flotar {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.targeta-inici h1 { margin-bottom: 1.2rem; text-align: center; font-size: clamp(1.9rem, 5vw, 2.6rem); }
+
+.nota-obligatori { margin: 0 0 1rem; text-align: center; font-size: .82rem; opacity: .75; }
+
+.selector-jugadors {
+  display: flex;
+  justify-content: center;
+  gap: .6rem;
+  margin: 0 0 1.4rem;
+  padding: 0;
+  border: 0;
+}
+.selector-jugadors label {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .45rem 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 2px solid var(--linia);
+  border-radius: 999px;
+}
+.selector-jugadors input { accent-color: var(--globus); }
+
+.camp { margin-bottom: .9rem; }
+.camp label { display: block; font-weight: 700; }
+.obligatori { color: var(--vermell); }
+.pista { display: block; margin: .1rem 0 .4rem; font-size: .82rem; opacity: .75; }
+
+.informacio {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .8rem;
+  margin: 1.4rem 0;
+}
+.informacio section { padding: .8rem 1rem; background: #eef6fb; border-radius: 14px; }
+.informacio .destacat { grid-column: 1 / -1; background: var(--paraula); }
+.informacio h2 { margin-bottom: .2rem; font-size: 1.05rem; }
+.informacio p { margin: 0; font-size: .92rem; overflow-wrap: anywhere; }
+
+.botons { display: flex; flex-wrap: wrap; justify-content: center; gap: .8rem; }
+
+@media (max-width: 520px) {
+  .targeta-inici { padding: 0 1.2rem 1.5rem; }
+  .informacio { grid-template-columns: 1fr; }
+}
+
+
+/* ===== Pàgina del joc ===== */
+
+/* Capçalera */
+.capcalera {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .8rem 1rem;
+  padding: .9rem 1.2rem;
+  background: var(--paper);
+  border-bottom: 3px solid var(--tinta);
+}
+.idioma { margin: 0 0 0 auto; font-weight: 700; }
+
+.formulari-paraula { display: flex; align-items: center; gap: .5rem; flex: 1 1 380px; max-width: 540px; }
+.formulari-paraula input { flex: 1; }
+
+.boto-ull {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 42px;
+  height: 42px;
+  color: var(--tinta);
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.boto-ull:hover, .boto-ull[aria-pressed="true"] { background: var(--paraula); }
+.ull-ratllat { display: none; }
+.boto-ull[aria-pressed="true"] .ull-ratllat { display: block; }
+
+/* Contingut */
+.joc { display: grid; gap: 1.2rem; max-width: 1100px; margin: 1.5rem auto 2.5rem; padding: 0 1rem; }
+
+/* Paraula secreta */
+.paraula {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 6.5rem;
+  padding: 1rem;
+  font-family: var(--font-titol);
+  font-size: clamp(1.8rem, 6vw, 3.4rem);
+  letter-spacing: .35em;
+  text-indent: .35em;
+  text-align: center;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+  background: var(--paraula);
+  border: 3px solid var(--tinta);
+  border-radius: 22px;
+  transition: background-color .3s;
+}
+.paraula.guanyada { background: var(--verd-clar); }
+.paraula.perduda { color: #fff; background: var(--vermell); }
+
+/* Tauler: targeta jugador 1 | globus | (targeta jugador 2) */
+.tauler {
+  display: grid;
+  grid-template-columns: minmax(190px, 260px) 1fr;
+  grid-auto-columns: minmax(190px, 260px);
+  gap: 1.2rem;
+  padding: 1.2rem;
+  background: rgba(255, 255, 255, .72);
+  border: 3px solid var(--tinta);
+  border-radius: 22px;
+}
+
+.targeta-jugador {
+  padding: 1rem;
+  text-align: center;
+  color: #fff;
+  background: var(--targeta);
+  border: 3px solid var(--tinta);
+  border-radius: 18px;
+  transition: background-color .25s;
+}
+.targeta-jugador.torn-actiu { background: var(--verd); }
+.targeta-jugador.torn-inactiu { background: var(--targeta); }
+.targeta-jugador h2 { margin-bottom: .7rem; font-size: 1.25rem; overflow-wrap: anywhere; }
+.targeta-jugador dl { display: grid; gap: .6rem; margin: 0; }
+.targeta-jugador dt { font-size: .8rem; font-weight: 700; opacity: .92; }
+.targeta-jugador dd { margin: 0; font-size: 1.05rem; font-weight: 800; }
+
+.globus {
+  display: grid;
+  place-items: center;
+  min-height: 280px;
+  margin: 0;
+  background: var(--paper);
+  border: 3px solid var(--tinta);
+  border-radius: 22px;
+}
+.globus img { max-width: 80%; max-height: 260px; object-fit: contain; }
+
+/* Botons de lletres (creats dinàmicament) */
+.lletres { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; }
+.lletra {
+  width: 44px;
+  height: 44px;
+  font: 600 1.05rem var(--font-titol);
+  text-transform: uppercase;
+  color: var(--tinta);
+  background: var(--llima);
+  border: 2px solid var(--tinta);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform .08s;
+}
+.lletra:hover:not(:disabled) { transform: translateY(-2px); }
+/* Deshabilitat (abans de començar o ja triat): lletra i vora vermelles */
+.lletra:disabled {
+  color: var(--vermell);
+  background: var(--vermell-clar);
+  border-color: var(--vermell);
+  cursor: not-allowed;
+}
+
+/* Diàleg d'errors (showModal) */
+.dialeg {
+  width: min(92vw, 420px);
+  padding: 1.6rem;
+  text-align: center;
+  font-weight: 700;
+  color: var(--vermell);
+  background: var(--paper);
+  border: 3px solid var(--vermell);
+  border-radius: 20px;
+}
+.dialeg::backdrop { background: rgba(22, 33, 62, .65); }
+.dialeg p { margin: 0 0 1.2rem; font-size: 1.1rem; }
+
+@media (max-width: 760px) {
+  .idioma { margin-left: 0; }
+  .formulari-paraula { flex-basis: 100%; max-width: none; }
+  .tauler { grid-template-columns: 1fr; }
+  .lletra { width: 40px; height: 40px; }
+}
+
+
+/* ===== Finestra d'instruccions (400 x 400) ===== */
+.pagina-instruccions { background-color: var(--paper); background-image: none; }
+
+.quadre { padding: 1.1rem 1.4rem; text-align: center; }
+.quadre h1 { margin-bottom: .7rem; font-size: 1.35rem; color: var(--globus); }
+.quadre ul { margin: 0 0 1rem; padding-left: 1.1rem; text-align: left; font-size: .9rem; line-height: 1.4; }
+.quadre li { margin-bottom: .35rem; }

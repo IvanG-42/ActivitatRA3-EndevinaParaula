@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Joc encertar paraula</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;700;800&display=swap">
+  <link rel="stylesheet" href="css/estils.css">
+  <script src="js/index.js" defer></script>
+</head>
+<body class="pagina-inici">
+  <main class="targeta-inici">
+    <div class="globus-deco" aria-hidden="true"></div>
+    <h1>Joc encertar paraula</h1>
+
+    <form id="formulari-jugadors" novalidate>
+      <p class="nota-obligatori">* Camp obligatori</p>
+
+      <fieldset class="selector-jugadors">
+        <legend class="sr-nomes">Nombre de jugadors</legend>
+        <label><input type="radio" name="num-jugadors" value="1" checked> 1 jugador</label>
+        <label><input type="radio" name="num-jugadors" value="2"> 2 jugadors</label>
+      </fieldset>
+
+      <div class="camp" id="camp-jugador1">
+        <label for="nom-jugador1">Introdueix el nom del jugador 1: <span class="obligatori">*</span></label>
+        <small class="pista">Entre 4 i 14 caràcters: lletres, números i _</small>
+        <input type="text" id="nom-jugador1" name="nom-jugador1" placeholder="Exemple: Antonia_12" autocomplete="off">
+        <p class="missatge" id="missatge-jugador1" role="alert"></p>
+      </div>
+
+      <div class="camp" id="camp-jugador2" hidden>
+        <label for="nom-jugador2">Introdueix el nom del jugador 2: <span class="obligatori">*</span></label>
+        <small class="pista">Entre 4 i 14 caràcters: lletres, números i _</small>
+        <input type="text" id="nom-jugador2" name="nom-jugador2" placeholder="Exemple: Manolo15" autocomplete="off">
+        <p class="missatge" id="missatge-jugador2" role="alert"></p>
+      </div>
+
+      <div class="informacio">
+        <section class="destacat">
+          <h2>Puntuació més alta</h2>
+          <p id="puntuacio-alta">No hi ha puntuació actual</p>
+        </section>
+        <section>
+          <h2>Informació navegador</h2>
+          <p id="info-navegador"></p>
+        </section>
+        <section>
+          <h2>Idioma del joc</h2>
+          <p id="info-idioma"></p>
+        </section>
+        <section class="destacat">
+          <h2>Informació URL</h2>
+          <p id="info-url"></p>
+        </section>
+      </div>
+
+      <div class="botons">
+        <button type="submit" id="boto-comencar" class="boto">Començar partida</button>
+        <button type="button" id="boto-borrar" class="boto boto--suau">Borrar puntuació</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>
